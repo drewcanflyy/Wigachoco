@@ -18,6 +18,14 @@ import { ContactPage } from './pages/ContactPage'
 import type { OfficialProduct } from './types'
 
 const whatsappUrl = 'https://wa.me/212785466044'
+const basePath = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, '')
+
+const toRoute = (pathname: string) => {
+  const route = basePath && pathname.startsWith(basePath) ? pathname.slice(basePath.length) : pathname
+  return route === '' ? '/' : route
+}
+
+const toAppPath = (route: string) => `${basePath}${route}` || '/'
 
 const pages: NavItem[] = [
   { label: 'Accueil', path: '/' },
@@ -31,19 +39,19 @@ const pages: NavItem[] = [
 ]
 
 export function App() {
-  const [path, setPath] = useState(window.location.pathname)
+  const [path, setPath] = useState(() => toRoute(window.location.pathname))
   const [quickViewProduct, setQuickViewProduct] = useState<OfficialProduct | null>(null)
 
   useEffect(() => {
-    const onPopState = () => setPath(window.location.pathname)
+    const onPopState = () => setPath(toRoute(window.location.pathname))
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
   }, [])
 
   const navigate = (event: React.MouseEvent<HTMLAnchorElement>, nextPath: string) => {
     event.preventDefault()
-    if (window.location.pathname === nextPath) return
-    window.history.pushState({}, '', nextPath)
+    if (toRoute(window.location.pathname) === nextPath) return
+    window.history.pushState({}, '', toAppPath(nextPath))
     setPath(nextPath)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -133,7 +141,7 @@ export function App() {
         <BespokeBoxDrawer
           whatsappUrl={whatsappUrl}
           onBrowseProducts={() => {
-            window.history.pushState({}, '', '/produits')
+            window.history.pushState({}, '', toAppPath('/produits'))
             setPath('/produits')
             window.scrollTo({ top: 0, behavior: 'smooth' })
           }}

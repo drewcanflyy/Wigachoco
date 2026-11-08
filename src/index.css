@@ -40,6 +40,8 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -48,6 +50,14 @@ body {
   overflow-x: hidden;
   background-color: var(--cream);
   color: var(--cocoa);
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 ::selection {
