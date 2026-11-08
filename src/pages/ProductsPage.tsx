@@ -1,6 +1,16 @@
-import React, { useState, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, SlidersHorizontal, MessageCircle, Eye, Sparkles, RotateCcw, ShoppingBag } from 'lucide-react'
+import {
+  ChevronLeft,
+  ChevronRight,
+  Eye,
+  MessageCircle,
+  RotateCcw,
+  Search,
+  ShoppingBag,
+  SlidersHorizontal,
+  Sparkles,
+} from 'lucide-react'
 import { officialProducts } from '../officialProducts'
 import { useBox } from '../context/BoxContext'
 import type { OfficialProduct, ProductCategory } from '../types'
@@ -30,10 +40,12 @@ function getProductCategory(name: string): ProductCategory {
 }
 
 export const ProductsPage: React.FC<ProductsPageProps> = ({ onQuickView, whatsappUrl }) => {
+  const productsPerPage = 24
   const { addItem } = useBox()
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('all')
   const [sortBy, setSortBy] = useState<'default' | 'price-asc' | 'price-desc' | 'name'>('default')
+  const [currentPage, setCurrentPage] = useState(1)
 
   const categories: { id: ProductCategory; label: string }[] = [
     { id: 'all', label: `Tous (${officialProducts.length})` },
@@ -66,6 +78,20 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onQuickView, whatsap
 
     return result
   }, [search, selectedCategory, sortBy])
+
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / productsPerPage))
+  const firstProductIndex = (currentPage - 1) * productsPerPage
+  const currentProducts = filteredProducts.slice(firstProductIndex, firstProductIndex + productsPerPage)
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [search, selectedCategory, sortBy])
+
+  const goToPage = (page: number) => {
+    const nextPage = Math.min(Math.max(page, 1), totalPages)
+    setCurrentPage(nextPage)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
     <div style={{ paddingTop: 140, paddingBottom: 120 }}>
@@ -141,8 +167,14 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onQuickView, whatsap
           }}
         >
           <span>
-            Affichage de <strong>{filteredProducts.length}</strong> création
-            {filteredProducts.length > 1 ? 's' : ''}
+            {filteredProducts.length > 0 ? (
+              <>
+                Affichage de <strong>{firstProductIndex + 1}–{Math.min(firstProductIndex + productsPerPage, filteredProducts.length)}</strong>{' '}
+                sur <strong>{filteredProducts.length}</strong> création{filteredProducts.length > 1 ? 's' : ''}
+              </>
+            ) : (
+              <>0 création</>
+            )}
           </span>
 
           {(search || selectedCategory !== 'all' || sortBy !== 'default') && (
@@ -172,9 +204,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onQuickView, whatsap
 
         {/* Product Grid with Double-Bezel cards */}
         {filteredProducts.length > 0 ? (
+          <>
           <motion.div layout className="product-grid-refined">
             <AnimatePresence>
-              {filteredProducts.map((product) => {
+              {currentProducts.map((product) => {
                 const orderWaUrl = `${whatsappUrl}?text=${encodeURIComponent(
                   `Bonjour WigaChoco, je souhaite commander la création : "${product.name}" (${product.price} MAD).`
                 )}`
@@ -272,6 +305,69 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onQuickView, whatsap
               })}
             </AnimatePresence>
           </motion.div>
+          {totalPages > 1 && (
+            <nav
+              aria-label="Pagination des créations"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 12,
+                marginTop: 40,
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => goToPage(currentPage - 1)}
+                disabled={currentPage === 1}
+                aria-label="Page précédente"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  padding: '10px 14px',
+                  border: '1px solid rgba(var(--plum-rgb), 0.2)',
+                  borderRadius: 999,
+                  background: '#fff',
+                  color: 'var(--plum)',
+                  cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+                  opacity: currentPage === 1 ? 0.45 : 1,
+                  fontWeight: 700,
+                }}
+              >
+                <ChevronLeft size={17} />
+                Précédent
+              </button>
+
+              <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 700 }}>
+                Page {currentPage} sur {totalPages}
+              </span>
+
+              <button
+                type="button"
+                onClick={() => goToPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                aria-label="Page suivante"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  padding: '10px 14px',
+                  border: '1px solid var(--plum)',
+                  borderRadius: 999,
+                  background: 'var(--plum)',
+                  color: '#fff',
+                  cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+                  opacity: currentPage === totalPages ? 0.45 : 1,
+                  fontWeight: 700,
+                }}
+              >
+                Suivant
+                <ChevronRight size={17} />
+              </button>
+            </nav>
+          )}
+          </>
         ) : (
           <div
             style={{
