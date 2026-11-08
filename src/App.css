@@ -1570,6 +1570,17 @@ p {
     white-space: normal;
     text-align: center;
   }
+  .gift-event-button {
+    width: 100%;
+    min-height: 56px;
+    justify-content: center;
+    padding: 10px 14px;
+    white-space: normal;
+    text-align: center;
+  }
+  .gift-event-button span {
+    line-height: 1.25;
+  }
   .contact-submit-button {
     min-height: 56px !important;
     height: auto !important;

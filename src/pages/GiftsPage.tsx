@@ -278,7 +278,7 @@ Pouvez-vous me proposer un devis personnalisé et les délais de livraison ? Mer
               href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
-              className="btn-luxury btn-luxury-gold"
+              className="btn-luxury btn-luxury-gold gift-event-button"
             >
               <span>Discuter avec notre responsable événementiel</span>
               <div className="btn-icon-pill">
