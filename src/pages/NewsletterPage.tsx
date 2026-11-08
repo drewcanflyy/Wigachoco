@@ -43,7 +43,7 @@ export const NewsletterPage: React.FC = () => {
   ]
 
   return (
-    <div style={{ paddingTop: 140, paddingBottom: 120 }}>
+    <div className="page-content" style={{ paddingTop: 140, paddingBottom: 120 }}>
       {/* Header */}
       <section className="shell" style={{ marginBottom: 60 }}>
         <div className="eyebrow-badge">
@@ -63,7 +63,7 @@ export const NewsletterPage: React.FC = () => {
       <section className="shell" style={{ marginBottom: 90 }}>
         <div className="doppel-shell dark" style={{ background: 'var(--plum)' }}>
           <div
-            className="doppel-core dark"
+            className="doppel-core dark newsletter-panel"
             style={{
               padding: 'clamp(36px, 6vw, 70px)',
               background: 'var(--plum)',
@@ -105,6 +105,7 @@ export const NewsletterPage: React.FC = () => {
             <div>
               {isSubscribed ? (
                 <div
+                  className="newsletter-form"
                   style={{
                     background: 'rgba(255, 255, 255, 0.12)',
                     padding: 36,
@@ -123,6 +124,7 @@ export const NewsletterPage: React.FC = () => {
                 </div>
               ) : (
                 <form
+                  className="newsletter-form"
                   onSubmit={handleSubmit}
                   style={{
                     background: 'rgba(255, 255, 255, 0.08)',

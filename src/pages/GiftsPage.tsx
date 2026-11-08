@@ -54,7 +54,7 @@ Pouvez-vous me proposer un devis personnalisé et les délais de livraison ? Mer
   }
 
   return (
-    <div style={{ paddingTop: 140, paddingBottom: 120 }}>
+    <div className="page-content" style={{ paddingTop: 140, paddingBottom: 120 }}>
       {/* Header */}
       <section className="shell" style={{ marginBottom: 60 }}>
         <div className="eyebrow-badge">
@@ -85,7 +85,7 @@ Pouvez-vous me proposer un devis personnalisé et les délais de livraison ? Mer
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 36 }}>
+            <div className="gift-options-grid">
               {/* Step 1: Occasion */}
               <div>
                 <label
@@ -109,16 +109,8 @@ Pouvez-vous me proposer un devis personnalisé et les délais de livraison ? Mer
                         key={item}
                         type="button"
                         onClick={() => toggleOccasion(item)}
+                        className="gift-option-button"
                         style={{
-                          padding: '12px 18px',
-                          borderRadius: 14,
-                          textAlign: 'left',
-                          fontSize: '0.88rem',
-                          fontWeight: 600,
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
                           border: isSelected ? '2px solid var(--plum)' : '1px solid rgba(var(--cocoa-rgb), 0.12)',
                           background: isSelected ? 'rgba(var(--plum-rgb), 0.06)' : '#ffffff',
                           color: isSelected ? 'var(--plum)' : 'var(--cocoa)',
@@ -156,16 +148,8 @@ Pouvez-vous me proposer un devis personnalisé et les délais de livraison ? Mer
                         key={item}
                         type="button"
                         onClick={() => toggleFlavor(item)}
+                        className="gift-option-button"
                         style={{
-                          padding: '12px 18px',
-                          borderRadius: 14,
-                          textAlign: 'left',
-                          fontSize: '0.88rem',
-                          fontWeight: 600,
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
                           border: isSelected ? '2px solid var(--gold)' : '1px solid rgba(var(--cocoa-rgb), 0.12)',
                           background: isSelected ? 'rgba(var(--gold-rgb), 0.08)' : '#ffffff',
                           color: isSelected ? 'var(--plum)' : 'var(--cocoa)',
@@ -203,16 +187,8 @@ Pouvez-vous me proposer un devis personnalisé et les délais de livraison ? Mer
                         key={item}
                         type="button"
                         onClick={() => toggleSupport(item)}
+                        className="gift-option-button"
                         style={{
-                          padding: '12px 18px',
-                          borderRadius: 14,
-                          textAlign: 'left',
-                          fontSize: '0.88rem',
-                          fontWeight: 600,
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
                           border: isSelected ? '2px solid var(--plum)' : '1px solid rgba(var(--cocoa-rgb), 0.12)',
                           background: isSelected ? 'rgba(var(--plum-rgb), 0.06)' : '#ffffff',
                           color: isSelected ? 'var(--plum)' : 'var(--cocoa)',
@@ -230,6 +206,7 @@ Pouvez-vous me proposer un devis personnalisé et les délais de livraison ? Mer
 
             {/* Generated Summary Box */}
             <div
+              className="gift-summary"
               style={{
                 marginTop: 48,
                 padding: '24px 30px',
@@ -269,12 +246,7 @@ Pouvez-vous me proposer un devis personnalisé et les délais de livraison ? Mer
       {/* Visual Showcase */}
       <section className="shell">
         <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: 40,
-            alignItems: 'center',
-          }}
+          className="responsive-two-column"
         >
           <div className="doppel-shell">
             <div className="doppel-core" style={{ overflow: 'hidden', height: 460 }}>

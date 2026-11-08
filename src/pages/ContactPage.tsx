@@ -27,7 +27,7 @@ Message : ${message}`
   }
 
   return (
-    <div style={{ paddingTop: 140, paddingBottom: 120 }}>
+    <div className="page-content" style={{ paddingTop: 140, paddingBottom: 120 }}>
       {/* Header */}
       <section className="shell" style={{ marginBottom: 60 }}>
         <div className="eyebrow-badge">
@@ -46,12 +46,7 @@ Message : ${message}`
       {/* Grid: Contact Details & Interactive Form */}
       <section className="shell">
         <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: 40,
-            alignItems: 'start',
-          }}
+          className="responsive-two-column contact-layout"
         >
           {/* Left Column: Direct Contacts */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -286,7 +281,7 @@ Message : ${message}`
 
                 <button
                   type="submit"
-                  className="btn-luxury btn-luxury-primary"
+                  className="btn-luxury btn-luxury-primary contact-submit-button"
                   style={{ width: '100%', justifyContent: 'center', height: 50, marginTop: 10 }}
                 >
                   <span>Envoyer la demande sur WhatsApp</span>

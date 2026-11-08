@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Eye, MessageCircle, MapPin } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Eye, MessageCircle, MapPin } from 'lucide-react'
 import { officialShowroom } from '../officialShowroom'
 import { LightboxModal } from '../components/LightboxModal'
 
@@ -9,10 +9,23 @@ interface ShowroomPageProps {
 }
 
 export const ShowroomPage: React.FC<ShowroomPageProps> = ({ whatsappUrl }) => {
+  const imagesPerPage = 12
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = Math.ceil(officialShowroom.length / imagesPerPage)
+  const firstImageIndex = (currentPage - 1) * imagesPerPage
+  const pageImages = useMemo(
+    () => officialShowroom.slice(firstImageIndex, firstImageIndex + imagesPerPage),
+    [firstImageIndex],
+  )
+
+  const goToPage = (page: number) => {
+    setCurrentPage(Math.min(Math.max(page, 1), totalPages))
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
-    <div style={{ paddingTop: 140, paddingBottom: 120 }}>
+    <div className="page-content" style={{ paddingTop: 140, paddingBottom: 120 }}>
       {/* Page Header */}
       <section className="shell" style={{ marginBottom: 50 }}>
         <div className="eyebrow-badge">
@@ -88,11 +101,11 @@ export const ShowroomPage: React.FC<ShowroomPageProps> = ({ whatsappUrl }) => {
       {/* Masonry Image Gallery */}
       <section className="shell">
         <div className="showroom-masonry">
-          {officialShowroom.map((imgSrc, idx) => (
+          {pageImages.map((imgSrc, idx) => (
             <motion.div
               key={imgSrc}
               className="showroom-item"
-              onClick={() => setActiveImageIndex(idx)}
+              onClick={() => setActiveImageIndex(firstImageIndex + idx)}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
@@ -114,6 +127,29 @@ export const ShowroomPage: React.FC<ShowroomPageProps> = ({ whatsappUrl }) => {
             </motion.div>
           ))}
         </div>
+        {totalPages > 1 && (
+          <nav className="catalogue-pagination" aria-label="Pagination de la galerie">
+            <button
+              type="button"
+              className="catalogue-page-button"
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              <ChevronLeft size={17} />
+              Précédent
+            </button>
+            <span>Page {currentPage} sur {totalPages}</span>
+            <button
+              type="button"
+              className="catalogue-page-button catalogue-page-button-primary"
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Suivant
+              <ChevronRight size={17} />
+            </button>
+          </nav>
+        )}
       </section>
 
       {/* Lightbox Modal */}

@@ -35,7 +35,7 @@ export const StoryPage: React.FC<StoryPageProps> = ({ onNavigate }) => {
   ]
 
   return (
-    <div style={{ paddingTop: 140, paddingBottom: 120 }}>
+    <div className="page-content" style={{ paddingTop: 140, paddingBottom: 120 }}>
       {/* Editorial Header */}
       <section className="shell" style={{ marginBottom: 70 }}>
         <div className="eyebrow-badge">
@@ -148,14 +148,7 @@ export const StoryPage: React.FC<StoryPageProps> = ({ onNavigate }) => {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              <div
-                style={{
-                  padding: 24,
-                  borderRadius: 16,
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
-                }}
-              >
+              <div className="story-milestone-card">
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
                   <Clock size={20} color="var(--gold)" />
                   <h4 style={{ color: '#ffffff', fontSize: '1.1rem', margin: 0 }}>Décembre 2025</h4>
@@ -165,14 +158,7 @@ export const StoryPage: React.FC<StoryPageProps> = ({ onNavigate }) => {
                 </p>
               </div>
 
-              <div
-                style={{
-                  padding: 24,
-                  borderRadius: 16,
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
-                }}
-              >
+              <div className="story-milestone-card">
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
                   <Award size={20} color="var(--gold)" />
                   <h4 style={{ color: '#ffffff', fontSize: '1.1rem', margin: 0 }}>Conception Diététique</h4>

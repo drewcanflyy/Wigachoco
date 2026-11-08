@@ -40,7 +40,7 @@ function getProductCategory(name: string): ProductCategory {
 }
 
 export const ProductsPage: React.FC<ProductsPageProps> = ({ onQuickView, whatsappUrl }) => {
-  const productsPerPage = 24
+  const productsPerPage = 12
   const { addItem } = useBox()
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('all')
@@ -94,7 +94,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onQuickView, whatsap
   }
 
   return (
-    <div style={{ paddingTop: 140, paddingBottom: 120 }}>
+    <div className="page-content" style={{ paddingTop: 140, paddingBottom: 120 }}>
       {/* Page Hero Header */}
       <section className="shell" style={{ marginBottom: 48 }}>
         <div className="eyebrow-badge">
@@ -169,7 +169,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onQuickView, whatsap
           <span>
             {filteredProducts.length > 0 ? (
               <>
-                Affichage de <strong>{firstProductIndex + 1}–{Math.min(firstProductIndex + productsPerPage, filteredProducts.length)}</strong>{' '}
+                Affichage de <strong>{firstProductIndex + 1}-{Math.min(firstProductIndex + productsPerPage, filteredProducts.length)}</strong>{' '}
                 sur <strong>{filteredProducts.length}</strong> création{filteredProducts.length > 1 ? 's' : ''}
               </>
             ) : (

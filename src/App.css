@@ -1024,6 +1024,93 @@ p {
   opacity: 1;
 }
 
+.catalogue-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 40px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.catalogue-page-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 9px 14px;
+  border: 1px solid rgba(var(--plum-rgb), 0.22);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--plum);
+  font: inherit;
+  cursor: pointer;
+}
+
+.catalogue-page-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.catalogue-page-button-primary {
+  border-color: var(--plum);
+  background: var(--plum);
+  color: #ffffff;
+}
+
+.story-milestone-card {
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 12px 28px rgba(20, 8, 10, 0.16);
+}
+
+.responsive-two-column {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+  align-items: center;
+}
+
+.contact-layout {
+  align-items: start;
+}
+
+.gift-options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px;
+}
+
+.gift-options-grid > * {
+  min-width: 0;
+}
+
+.gift-option-button {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 18px;
+  border-radius: 14px;
+  text-align: left;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  overflow-wrap: anywhere;
+}
+
+.gift-option-button span,
+.gift-summary p {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 /* Modal Lightbox */
 .lightbox-backdrop {
   position: fixed;
@@ -1323,6 +1410,25 @@ p {
 }
 
 @media (max-width: 768px) {
+  .shell,
+  .shell-narrow {
+    width: min(100% - 28px, 1280px);
+  }
+
+  .page-content {
+    padding-top: 104px !important;
+    padding-bottom: 88px !important;
+  }
+
+  .page-content h1 {
+    font-size: clamp(2.15rem, 10vw, 2.8rem) !important;
+    line-height: 1.08;
+  }
+
+  .page-content h2 {
+    font-size: clamp(1.7rem, 8vw, 2.15rem) !important;
+  }
+
   /* Nav already collapsed via 900px breakpoint */
   .nav-links-desktop, .nav-cta-wrapper .nav-wa-btn, .nav-cta-wrapper .nav-icon-btn {
     display: none;
@@ -1339,8 +1445,30 @@ p {
     gap: 16px;
   }
   .product-grid-refined {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .product-luxury-card .doppel-core {
+    padding: 8px !important;
+  }
+  .product-meta {
+    padding: 12px 2px 4px;
+  }
+  .product-image-container {
+    aspect-ratio: 1 / 1;
+  }
+  .product-price-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .product-price-row > div {
+    width: 100%;
+    justify-content: space-between;
+    gap: 4px !important;
+  }
+  .product-price-row > div button {
+    padding: 5px 8px !important;
   }
   .product-card-badge {
     font-size: 0.65rem;
@@ -1365,7 +1493,81 @@ p {
     gap: 12px;
   }
   .showroom-masonry {
-    columns: 1 100%;
+    column-count: 2;
+    column-gap: 12px;
+  }
+  .showroom-item {
+    margin-bottom: 12px;
+    border-radius: 14px;
+  }
+  .showroom-hover-lens {
+    display: none;
+  }
+  .catalogue-pagination {
+    gap: 8px;
+    margin-top: 28px;
+  }
+  .catalogue-pagination span {
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+  .catalogue-page-button {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+  .newsletter-panel {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 28px !important;
+    padding: 24px !important;
+  }
+  .newsletter-form {
+    min-width: 0;
+    padding: 24px 18px !important;
+  }
+  .gift-options-grid,
+  .responsive-two-column {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+  .gift-option-button {
+    padding: 12px 14px;
+  }
+  .gift-summary {
+    align-items: stretch !important;
+    flex-direction: column;
+    gap: 16px !important;
+    margin-top: 32px !important;
+    padding: 20px !important;
+  }
+  .gift-summary .btn-luxury {
+    width: 100%;
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+  }
+  .contact-submit-button {
+    min-height: 56px !important;
+    height: auto !important;
+    gap: 10px;
+    padding: 10px 14px;
+    white-space: normal;
+    text-align: center;
+  }
+  .contact-submit-button span {
+    line-height: 1.25;
+  }
+  .story-milestone-card {
+    padding: 20px;
+  }
+  .floating-concierge {
+    right: 14px;
+    bottom: 14px;
+    max-width: calc(100vw - 28px);
+  }
+  .concierge-pill {
+    max-width: 100%;
+    padding: 10px 14px;
+    font-size: 0.8rem;
   }
   .lightbox-prev {
     left: 10px;
