@@ -1554,6 +1554,10 @@ p {
     grid-template-columns: minmax(0, 1fr);
     gap: 28px;
   }
+  .responsive-two-column > * {
+    min-width: 0;
+    max-width: 100%;
+  }
   .gift-option-button {
     padding: 12px 14px;
   }
@@ -1572,14 +1576,23 @@ p {
   }
   .gift-event-button {
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     min-height: 56px;
     justify-content: center;
     padding: 10px 14px;
     white-space: normal;
     text-align: center;
+    overflow: hidden;
   }
   .gift-event-button span {
+    min-width: 0;
+    flex: 1 1 auto;
     line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+  .gift-event-button .btn-icon-pill {
+    flex: 0 0 auto;
   }
   .contact-submit-button {
     min-height: 56px !important;
