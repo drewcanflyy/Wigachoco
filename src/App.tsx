@@ -4,7 +4,6 @@ import './App.css'
 import { BoxProvider } from './context/BoxContext'
 import { Navbar, type NavItem } from './components/Navbar'
 import { Footer } from './components/Footer'
-import { FloatingConcierge } from './components/FloatingConcierge'
 import { QuickViewModal } from './components/QuickViewModal'
 import { BespokeBoxDrawer } from './components/BespokeBoxDrawer'
 import { CustomCursor } from './components/CustomCursor'
@@ -139,9 +138,6 @@ export function App() {
             window.scrollTo({ top: 0, behavior: 'smooth' })
           }}
         />
-
-        {/* Floating Concierge (WhatsApp) */}
-        <FloatingConcierge whatsappUrl={whatsappUrl} />
 
         {/* Global Quick View Modal */}
         <QuickViewModal
